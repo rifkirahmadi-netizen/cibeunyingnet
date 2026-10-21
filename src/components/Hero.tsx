@@ -71,17 +71,19 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenLetterForm }) => {
               </button>
 
               <button
-                onClick={() => onNavigate('layanan-surat')}
-                className="px-4 py-3 text-sm font-medium text-stone-700 hover:text-stone-900 hover:bg-stone-200/60 rounded-lg transition-colors"
+                onClick={() => onNavigate('alur-perancangan')}
+                className="px-4 py-3 text-sm font-semibold text-stone-900 bg-stone-200/80 hover:bg-stone-300/80 rounded-lg transition-colors flex items-center gap-2 border border-stone-300"
               >
-                Lacak Status Berkas
+                <span className="text-xs font-bold font-mono">▲ Vercel Ready</span>
               </button>
             </div>
 
             {/* Micro Civic Notice */}
-            <div className="pt-2 flex items-center gap-2 text-xs text-stone-500">
+            <div className="pt-2 flex flex-wrap items-center gap-y-1 gap-x-3 text-xs text-stone-500">
               <span className="font-semibold text-stone-700">Pelayanan Bebas Pungli:</span>
               <span>Seluruh penerbitan surat pengantar & keterangan di Balai Desa Cibeunying tidak dipungut biaya (Gratis).</span>
+              <span className="hidden sm:inline text-stone-300">·</span>
+              <span className="text-emerald-700 font-medium">Vercel SPA Configured</span>
             </div>
           </div>
 

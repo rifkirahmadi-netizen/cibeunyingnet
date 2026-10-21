@@ -14,13 +14,25 @@ import {
   Check,
   Building2,
   Lock,
-  Sparkles
+  Sparkles,
+  Cloud,
+  Terminal,
+  Globe,
+  Copy,
+  ExternalLink
 } from 'lucide-react';
 import { DOKUMENTASI_PERANCANGAN } from '../data/villageData';
 
 export const AlurPerancanganSID: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'sdlc' | 'flowchart' | 'arsitektur' | 'simulasi'>('sdlc');
+  const [activeTab, setActiveTab] = useState<'sdlc' | 'flowchart' | 'arsitektur' | 'simulasi' | 'vercel'>('sdlc');
   const [selectedPhase, setSelectedPhase] = useState<number>(0);
+  const [copiedVercelCmd, setCopiedVercelCmd] = useState<string | null>(null);
+
+  const handleCopyCmd = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedVercelCmd(id);
+    setTimeout(() => setCopiedVercelCmd(null), 2000);
+  };
 
   // State for interactive simulation
   const [simStep, setSimStep] = useState<number>(0);
@@ -128,6 +140,18 @@ export const AlurPerancanganSID: React.FC = () => {
           >
             <Play className="w-4 h-4" />
             <span>4. Simulasi UAT Alur Interaktif</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('vercel')}
+            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-colors flex items-center gap-2 ${
+              activeTab === 'vercel'
+                ? 'bg-emerald-800 text-white shadow-xs'
+                : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+            }`}
+          >
+            <Cloud className="w-4 h-4 text-amber-300" />
+            <span>5. Konfigurasi Vercel (Produksi)</span>
           </button>
         </div>
 
@@ -681,6 +705,202 @@ export const AlurPerancanganSID: React.FC = () => {
               </div>
 
             </div>
+          </div>
+        )}
+
+        {/* TAB 5: KONFIGURASI & DEPLOYMENT VERCEL */}
+        {activeTab === 'vercel' && (
+          <div className="space-y-8">
+            {/* Header Banner */}
+            <div className="bg-stone-950 text-white p-6 sm:p-8 rounded-2xl border border-stone-800">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-amber-300 font-semibold mb-2">
+                    <Cloud className="w-4 h-4 text-amber-300" />
+                    <span>Versi Siap Deploy: Vercel Edge Network</span>
+                  </div>
+                  <h3 className="text-2xl font-bold">
+                    Konfigurasi Produksi Vercel SID Cibeunying
+                  </h3>
+                  <p className="text-sm text-stone-300 mt-2 leading-relaxed">
+                    Aplikasi telah dioptimasi penuh untuk lingkungan Vercel. Menggunakan berkas <code className="text-amber-300 font-mono text-xs">vercel.json</code> dengan aturan routing SPA rewrites otomatis dan cache headers performa tinggi.
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-end gap-2">
+                  <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Status: Vercel Ready (Vite SPA)</span>
+                  </span>
+                  <span className="text-xs text-stone-400">Framework: Vite · Output: dist</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Step-by-Step Guide Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Step 1 */}
+              <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+                <div>
+                  <div className="w-8 h-8 rounded-full bg-emerald-800 text-white font-bold flex items-center justify-center text-xs mb-3">
+                    01
+                  </div>
+                  <h4 className="text-base font-bold text-stone-900">
+                    Import via Dashboard Vercel
+                  </h4>
+                  <p className="text-xs text-stone-600 mt-2 leading-relaxed">
+                    1. Masuk ke akun <a href="https://vercel.com" target="_blank" rel="noreferrer" className="text-emerald-700 font-semibold underline inline-flex items-center gap-0.5">vercel.com <ExternalLink className="w-3 h-3 inline" /></a>
+                    <br />
+                    2. Klik <strong>"Add New..."</strong> ➔ <strong>"Project"</strong>
+                    <br />
+                    3. Sambungkan repositori GitHub/GitLab Anda.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-stone-100 text-[11px] text-stone-500">
+                  Preset terdeteksi otomatis: <strong>Vite</strong>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+                <div>
+                  <div className="w-8 h-8 rounded-full bg-emerald-800 text-white font-bold flex items-center justify-center text-xs mb-3">
+                    02
+                  </div>
+                  <h4 className="text-base font-bold text-stone-900">
+                    Atau Deploy Menggunakan CLI
+                  </h4>
+                  <p className="text-xs text-stone-600 mt-2 leading-relaxed">
+                    Jalankan perintah langsung dari terminal komputer Anda:
+                  </p>
+                  <div className="mt-3 bg-stone-900 p-2.5 rounded-lg font-mono text-xs text-emerald-400 flex items-center justify-between">
+                    <span>vercel --prod</span>
+                    <button
+                      onClick={() => handleCopyCmd('vercel --prod', 'cli')}
+                      className="text-stone-400 hover:text-white"
+                      title="Salin Perintah"
+                    >
+                      {copiedVercelCmd === 'cli' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    </button>
+                  </div>
+                </div>
+                <div className="mt-4 pt-3 border-t border-stone-100 text-[11px] text-stone-500">
+                  Build command: <code className="font-mono text-stone-800">npm run build</code>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+                <div>
+                  <div className="w-8 h-8 rounded-full bg-emerald-800 text-white font-bold flex items-center justify-center text-xs mb-3">
+                    03
+                  </div>
+                  <h4 className="text-base font-bold text-stone-900">
+                    Hubungkan Domain Desa
+                  </h4>
+                  <p className="text-xs text-stone-600 mt-2 leading-relaxed">
+                    Hubungkan custom domain resmi Pemerintah Desa (seperti <span className="font-semibold text-stone-800">cibeunying.desa.id</span>) di menu <strong>Project Settings ➔ Domains</strong>. Vercel memberikan SSL otomatis.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-stone-100 text-[11px] text-stone-500">
+                  Sertifikat SSL Let's Encrypt Otomatis
+                </div>
+              </div>
+            </div>
+
+            {/* vercel.json File Inspector */}
+            <div className="bg-stone-50 p-6 rounded-2xl border border-stone-200">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-emerald-800" />
+                  <span className="text-xs font-bold text-stone-900 uppercase tracking-wide">
+                    Berkas Konfigurasi: vercel.json (Telah Diterapkan di Root Project)
+                  </span>
+                </div>
+                <button
+                  onClick={() => handleCopyCmd(`{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}`, 'json')}
+                  className="px-3 py-1 text-xs font-semibold bg-white border border-stone-300 rounded-md hover:bg-stone-100 flex items-center gap-1.5"
+                >
+                  {copiedVercelCmd === 'json' ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedVercelCmd === 'json' ? 'Tersalin' : 'Salin vercel.json'}</span>
+                </button>
+              </div>
+
+              <pre className="bg-stone-900 text-emerald-300 p-4 rounded-xl text-xs font-mono overflow-x-auto leading-relaxed">
+{`{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}`}
+              </pre>
+            </div>
+
+            {/* Checklist Parameters */}
+            <div className="bg-emerald-50/70 border border-emerald-200 p-6 rounded-2xl">
+              <h4 className="text-sm font-bold text-emerald-950 mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-800" />
+                <span>Parameter Build Vercel untuk Sistem Informasi Desa Cibeunying</span>
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs text-stone-700">
+                <div className="bg-white p-3 rounded-lg border border-emerald-200/80">
+                  <span className="text-stone-400 block text-[11px]">Framework Preset</span>
+                  <span className="font-bold text-stone-900 font-mono">Vite</span>
+                </div>
+                <div className="bg-white p-3 rounded-lg border border-emerald-200/80">
+                  <span className="text-stone-400 block text-[11px]">Build Command</span>
+                  <span className="font-bold text-stone-900 font-mono">npm run build</span>
+                </div>
+                <div className="bg-white p-3 rounded-lg border border-emerald-200/80">
+                  <span className="text-stone-400 block text-[11px]">Output Directory</span>
+                  <span className="font-bold text-stone-900 font-mono">dist</span>
+                </div>
+                <div className="bg-white p-3 rounded-lg border border-emerald-200/80">
+                  <span className="text-stone-400 block text-[11px]">Node.js Runtime</span>
+                  <span className="font-bold text-stone-900 font-mono">20.x atau 22.x</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         )}
 
