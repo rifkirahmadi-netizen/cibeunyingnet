@@ -1,0 +1,6 @@
+{
+  "name": "Sistem Informasi Balai Desa Cibeunying Majenang",
+  "description": "Portal Resmi Sistem Informasi Desa (SID) Kantor Balai Desa Cibeunying, Kecamatan Majenang, Kabupaten Cilacap beserta Dokumentasi Alur Perancangan Sistem.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
