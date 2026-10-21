@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Compass, Users, MapPin, TreePine, Award, ChevronRight } from 'lucide-react';
 import { PROFIL_DESA, DATA_DUSUN } from '../data/villageData';
+import pertanianImage from '../assets/images/cibeunying_pertanian_majenang_1791949216415.jpg';
 
 export const ProfilDemografi: React.FC = () => {
   const [selectedDusun, setSelectedDusun] = useState<string>(DATA_DUSUN[0].nama);
@@ -30,7 +31,7 @@ export const ProfilDemografi: React.FC = () => {
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-stone-200 shadow-sm group">
               <img
-                src="/src/assets/images/cibeunying_pertanian_majenang_1791949216415.jpg"
+                src={pertanianImage}
                 alt="Persawahan dan Alam Majenang Cibeunying"
                 className="w-full h-80 sm:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
                 referrerPolicy="no-referrer"

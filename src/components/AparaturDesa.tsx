@@ -1,6 +1,7 @@
 import React from 'react';
 import { Users, Award, Shield, CheckCircle2, Clock } from 'lucide-react';
 import { DATA_APARATUR, PROFIL_DESA } from '../data/villageData';
+import loketImage from '../assets/images/cibeunying_pelayanan_warga_1791949218190.jpg';
 
 export const AparaturDesa: React.FC = () => {
   return (
@@ -26,7 +27,7 @@ export const AparaturDesa: React.FC = () => {
           <div className="lg:col-span-5">
             <div className="rounded-xl overflow-hidden border border-stone-200 shadow-xs">
               <img
-                src="/src/assets/images/cibeunying_pelayanan_warga_1791949218190.jpg"
+                src={loketImage}
                 alt="Loket Pelayanan Terpadu Balai Desa Cibeunying"
                 className="w-full h-64 sm:h-72 object-cover"
                 referrerPolicy="no-referrer"

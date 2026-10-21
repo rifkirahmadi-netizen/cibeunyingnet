@@ -850,25 +850,10 @@ export const AlurPerancanganSID: React.FC = () => {
 
               <pre className="bg-stone-900 text-emerald-300 p-4 rounded-xl text-xs font-mono overflow-x-auto leading-relaxed">
 {`{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
     }
   ]
 }`}
@@ -879,7 +864,7 @@ export const AlurPerancanganSID: React.FC = () => {
             <div className="bg-emerald-50/70 border border-emerald-200 p-6 rounded-2xl">
               <h4 className="text-sm font-bold text-emerald-950 mb-3 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-800" />
-                <span>Parameter Build Vercel untuk Sistem Informasi Desa Cibeunying</span>
+                <span>Pengaturan Project Settings di Dashboard Vercel</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs text-stone-700">
                 <div className="bg-white p-3 rounded-lg border border-emerald-200/80">
@@ -895,8 +880,36 @@ export const AlurPerancanganSID: React.FC = () => {
                   <span className="font-bold text-stone-900 font-mono">dist</span>
                 </div>
                 <div className="bg-white p-3 rounded-lg border border-emerald-200/80">
-                  <span className="text-stone-400 block text-[11px]">Node.js Runtime</span>
-                  <span className="font-bold text-stone-900 font-mono">20.x atau 22.x</span>
+                  <span className="text-stone-400 block text-[11px]">Install Command</span>
+                  <span className="font-bold text-stone-900 font-mono">npm install</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Troubleshooting Guide */}
+            <div className="bg-stone-900 text-stone-200 p-6 rounded-2xl border border-stone-800">
+              <h4 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                <ShieldAlert className="w-4 h-4 text-amber-400" />
+                <span>Solusi Masalah Umum Saat Deploy ke Vercel</span>
+              </h4>
+              <div className="space-y-3 text-xs text-stone-300 mt-3">
+                <div className="bg-stone-800/80 p-3.5 rounded-lg border border-stone-700">
+                  <span className="text-amber-300 font-bold block mb-1">1. Error "ERESOLVE could not resolve peer dependency" pada npm install:</span>
+                  <p className="leading-relaxed">
+                    Telah disediakan berkas <code className="text-emerald-400 font-mono">.npmrc</code> berisi <code className="text-emerald-400 font-mono">legacy-peer-deps=true</code> dan berkas <code className="text-emerald-400 font-mono">package-lock.json</code> terkunci untuk memastikan instalasi di server Vercel berjalan 100% mulus tanpa konflik versi.
+                  </p>
+                </div>
+                <div className="bg-stone-800/80 p-3.5 rounded-lg border border-stone-700">
+                  <span className="text-amber-300 font-bold block mb-1">2. Error "404 NOT_FOUND" saat halaman di-refresh:</span>
+                  <p className="leading-relaxed">
+                    Vite adalah Single Page App (SPA). Berkas <code className="text-emerald-400 font-mono">vercel.json</code> dengan aturan <code className="text-emerald-400 font-mono">rewrites</code> memastikan seluruh rute diteruskan ke <code className="text-emerald-400 font-mono">index.html</code>.
+                  </p>
+                </div>
+                <div className="bg-stone-800/80 p-3.5 rounded-lg border border-stone-700">
+                  <span className="text-amber-300 font-bold block mb-1">3. Gambar tidak muncul di produksi:</span>
+                  <p className="leading-relaxed">
+                    Semua gambar desa (Balai Desa, lanskap sawah, loket pelayanan) kini diimpor melalui pipa aset Vite (<code className="text-emerald-400 font-mono">import img from ...</code>) sehingga otomatis dikompresi dan diekspor ke folder produksi <code className="text-emerald-400 font-mono">dist/assets/</code>.
+                  </p>
                 </div>
               </div>
             </div>

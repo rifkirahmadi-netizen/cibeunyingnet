@@ -50,3 +50,15 @@ File `vercel.json` telah disediakan dengan konfigurasi:
 3. Masukkan domain desa Anda (misal `cibeunying.desa.id` atau `balai.cibeunying.id`).
 4. Atur DNS CNAME / A Record sesuai petunjuk yang diberikan oleh Vercel.
 5. Sertifikat SSL Let's Encrypt akan terbit secara otomatis.
+
+---
+
+## 🔧 Solusi Masalah / Troubleshooting Vercel
+
+| Masalah / Pesan Error | Penyebab Utama | Solusi yang Sudah Diterapkan |
+| :--- | :--- | :--- |
+| `npm error ERESOLVE could not resolve peer dependency` | Konflik versi peer dependency antara npm dan Vite/esbuild | Berkas `.npmrc` dengan `legacy-peer-deps=true` dan `package-lock.json` telah disertakan di root project. |
+| `404: NOT_FOUND` saat me-refresh halaman | Server Vercel mencari file statis sesuai path URL | Berkas `vercel.json` dengan konfigurasi rewrite `/(.*)` ke `/index.html` telah aktif. |
+| `__dirname is not defined in ES module scope` | Vite config menggunakan `__dirname` pada mode ESM Node 20/22 | `vite.config.ts` telah dimodifikasi menggunakan `fileURLToPath` dan `path.dirname` modern. |
+| Gambar Balai Desa / Lanskap tidak tampil di Vercel | Path string statis `/src/...` tidak tersalin ke folder `dist` | Seluruh gambar diimpor melalui pipa aset ESM (`import img from ...`) sehingga ter-*bundle* otomatis di `dist/assets/`. |
+

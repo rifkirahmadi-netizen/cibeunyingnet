@@ -1,6 +1,7 @@
 import React from 'react';
 import { Clock, MapPin, Phone, ShieldCheck, ArrowRight, FileCheck, Layers, Sparkles } from 'lucide-react';
 import { PROFIL_DESA } from '../data/villageData';
+import heroImage from '../assets/images/hero_balaidesa_cibeunying_1791949217224.jpg';
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
@@ -91,7 +92,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenLetterForm }) => {
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden border border-stone-300 shadow-md bg-stone-900 group">
               <img
-                src="/src/assets/images/hero_balaidesa_cibeunying_1791949217224.jpg"
+                src={heroImage}
                 alt="Kantor Balai Desa Cibeunying Majenang"
                 className="w-full h-80 sm:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
                 referrerPolicy="no-referrer"
